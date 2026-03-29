@@ -1,0 +1,31 @@
+﻿@model EstudianteMVC.Models.Estudiante
+
+<h2>✏️ Editar Estudiante</h2>
+
+<form method="post" class="card p-4 shadow" style="max-width: 400px;">
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input class="form-control" name="Nombre" value="@Model.Nombre" />
+    </div>
+
+    <div class="mb-3">
+        <label>Apellido</label>
+        <input class="form-control" name="Apellido" value="@Model.Apellido" />
+    </div>
+
+    <div class="mb-3">
+        <label>Edad</label>
+        <input class="form-control" type="number" name="Edad" value="@Model.Edad" />
+    </div>
+
+    <div class="mb-3">
+        <label>Correo</label>
+        <input class="form-control" name="Correo" value="@Model.Correo" />
+    </div>
+
+    <button class="btn btn-warning">Actualizar</button>
+
+</form>

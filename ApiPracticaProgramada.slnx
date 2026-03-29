@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="ApiPracticaProgramada/ApiPracticaProgramada.csproj" />
+  <Project Path="EstudianteMVC/EstudianteMVC.csproj" Id="913c5c79-7506-4322-981a-b7a1d55349c2" />
 </Solution>

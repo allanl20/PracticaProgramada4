@@ -1,0 +1,20 @@
+﻿@model List<EstudianteMVC.Models.WeatherForecast>
+
+<h2>Weather</h2>
+
+<table class="table">
+    <tr>
+        <th>Date</th>
+        <th>Temp</th>
+        <th>Summary</th>
+    </tr>
+
+    @foreach (var w in Model)
+    {
+        <tr>
+            <td>@w.Date</td>
+            <td>@w.TemperatureC</td>
+            <td>@w.Summary</td>
+        </tr>
+    }
+</table>

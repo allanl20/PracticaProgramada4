@@ -1,0 +1,35 @@
+﻿@model List<EstudianteMVC.Models.Estudiante>
+
+<h2>📋 Lista de Estudiantes</h2>
+
+<a class="btn btn-success mb-3" asp-controller="Estudiantes" asp-action="Create">
+    ➕ Nuevo Estudiante
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Nombre</td>
+                <td>@e.Apellido</td>
+                <td>@e.Edad</td>
+                <td>@e.Correo</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Estudiantes/Edit/@e.Id">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="/Estudiantes/Delete/@e.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
