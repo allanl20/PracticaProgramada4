@@ -1,60 +1,93 @@
 ﻿using ApiPracticaProgramada.Clases;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiPracticaProgramada.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/estudiantes")]
     public class EstudianteController : ControllerBase
     {
         private static List<Estudiante> estudiantes = new List<Estudiante>()
         {
-            new Estudiante("Juan", "Perez", 30, "juan@gmail.com"),
-            new Estudiante("Maria", "Gomez", 25, "maria@gmail.com"),
-            new Estudiante("Carlos", "Lopez", 40, "carlos@gmail.com")
+            new Estudiante(1, "Juan", "Perez", 30, "juan@gmail.com"),
+            new Estudiante(2, "Maria", "Gomez", 25, "maria@gmail.com"),
+            new Estudiante(3, "Carlos", "Lopez", 40, "carlos@gmail.com")
         };
 
-        /// <summary>
-        /// Get all personas.
-        /// </summary>
-        [HttpGet(Name = "GetEstudiantes")] //El name no es diferenciador
+        // GET: api/estudiantes
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Estudiante>), StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<Estudiante>> GetEstudiante() //Herencia
+        public ActionResult<IEnumerable<Estudiante>> GetEstudiantes()
         {
             return Ok(estudiantes);
-
         }
 
-        [HttpGet("{posicion}", Name = "GetEstudiante")] //El name no es diferenciador
-        public ActionResult GetEstudiante(int posicion)
+        // GET: api/estudiantes/1
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Estudiante), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult GetEstudiante(int id)
         {
-            return Ok(estudiantes[posicion]);
+            var estudiante = estudiantes.FirstOrDefault(e => e.Id == id);
+
+            if (estudiante == null)
+                return NotFound();
+
+            return Ok(estudiante);
         }
 
+        // POST: api/estudiantes
         [HttpPost]
         [SwaggerRequestExample(typeof(Estudiante), typeof(ApiPracticaProgramada.OpenApiExamples.EstudianteExample))]
         [ProducesResponseType(typeof(Estudiante), StatusCodes.Status201Created)]
-        public ActionResult PostEstudiante(Estudiante estudiante) //la entidad viaje en el body de la peticion
+        public ActionResult PostEstudiante([FromBody] Estudiante estudiante)
         {
+            if (estudiante == null)
+                return BadRequest();
+
+            estudiante.Id = estudiantes.Any() ? estudiantes.Max(e => e.Id) + 1 : 1;
+
             estudiantes.Add(estudiante);
+
+            return CreatedAtAction(nameof(GetEstudiante), new { id = estudiante.Id }, estudiante);
+        }
+
+        // PUT: api/estudiantes/1
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(Estudiante), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult PutEstudiante(int id, [FromBody] Estudiante estudianteActualizado)
+        {
+            var estudiante = estudiantes.FirstOrDefault(e => e.Id == id);
+
+            if (estudiante == null)
+                return NotFound();
+
+            estudiante.Nombre = estudianteActualizado.Nombre;
+            estudiante.Apellido = estudianteActualizado.Apellido;
+            estudiante.Edad = estudianteActualizado.Edad;
+            estudiante.Email = estudianteActualizado.Email;
+
             return Ok(estudiante);
         }
 
-
-        [HttpPut("{posicion}")] //Parametro obligatorio 
-        public ActionResult PutEstudiante(int posicion, Estudiante estudiante)
+        // DELETE: api/estudiantes/1
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult DeleteEstudiante(int id)
         {
-            estudiantes[posicion] = estudiante;
-            return Ok(estudiante);
-        }
+            var estudiante = estudiantes.FirstOrDefault(e => e.Id == id);
 
-        [HttpDelete("{posicion}")]
-        public ActionResult DeleteEstudiante(int posicion) //usar parametro obligatiorio para eliminar un registro, no es recomendable eliminar por nombre o apellido porque puede haber repetidos
-        {
-            estudiantes.RemoveAt(posicion);
+            if (estudiante == null)
+                return NotFound();
+
+            estudiantes.Remove(estudiante);
+
             return Ok();
         }
-
     }
 }

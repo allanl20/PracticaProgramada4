@@ -2,14 +2,15 @@
 
 namespace ApiPracticaProgramada.Clases
 {
-    using System.ComponentModel.DataAnnotations;
-
     /// <summary>
     /// Representa un estudiante.
     /// </summary>
     public class Estudiante
     {
-        
+        /// <summary>
+        /// Identificador único del estudiante.
+        /// </summary>
+        public int Id { get; set; }
 
         /// <summary>
         /// Nombre del estudiante.
@@ -32,11 +33,17 @@ namespace ApiPracticaProgramada.Clases
         /// <summary>
         /// Correo electrónico del estudiante.
         /// </summary>
+        [Required(ErrorMessage = "Correo requerido")]
         [EmailAddress(ErrorMessage = "Correo no válido")]
         public string Correo { get; set; }
 
-        public Estudiante(string nombre, string apellido, int edad, string correo)
+        // ✅ Constructor vacío (IMPORTANTE)
+        public Estudiante() { }
+
+        // ✅ Constructor completo
+        public Estudiante(int id, string nombre, string apellido, int edad, string correo)
         {
+            Id = id;
             Nombre = nombre;
             Apellido = apellido;
             Edad = edad;
