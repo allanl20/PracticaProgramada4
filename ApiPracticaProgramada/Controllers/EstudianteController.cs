@@ -69,7 +69,7 @@ namespace ApiPracticaProgramada.Controllers
             estudiante.Nombre = estudianteActualizado.Nombre;
             estudiante.Apellido = estudianteActualizado.Apellido;
             estudiante.Edad = estudianteActualizado.Edad;
-            estudiante.Email = estudianteActualizado.Email;
+            estudiante.Correo = estudianteActualizado.Correo;
 
             return Ok(estudiante);
         }

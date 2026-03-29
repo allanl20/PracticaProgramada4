@@ -6,7 +6,7 @@ namespace ApiPracticaProgramada.OpenApiExamples
     {
         public Estudiante GetExamples()
         {
-            return new Estudiante("Juan", "Perez", 30, "juan@gmail.com");
+            return new Estudiante(1,"Juan", "Perez", 30, "juan@gmail.com");
         }
     }
 }
