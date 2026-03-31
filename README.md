@@ -1,7 +1,18 @@
 Aplicación de los Principios SOLID en el Desarrollo de Software
 
 Análisis con evidencia en capas, middleware y aspectos del curso
+Curso: Programación Avanzada (SC-701)
+Profesor: Richard Arce Vargas
 
+
+ Integrantes finales del grupo
+FERNANDEZ ARIAS KEMBLY STEFY
+LEIVA SANCHEZ ALLAN ANDREY
+TOKUC OSMAN EMRE
+VILLAPLANA NAVARRO KENNETH
+
+Repositorio del proyecto en GitHub:
+https://github.com/allanl20/PracticaProgramada4.git
 
 Introducción
 Los principios SOLID constituyen un conjunto de buenas prácticas de diseño orientadas a la creación de software mantenible, escalable y flexible. Estos principios permiten mejorar la calidad del código y reducir el acoplamiento entre componentes, facilitando su evolución en el tiempo. Fueron introducidos por Robert C. Martin y han sido ampliamente adoptados en el desarrollo moderno de aplicaciones orientadas a objetos (Martin, 2000; Martin, 2003).
